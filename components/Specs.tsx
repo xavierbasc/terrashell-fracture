@@ -10,6 +10,8 @@ const specs = [
   { label: 'Audio',      value: 'PCM + MOD',            note: 'Real-time synthesis + libxmp tracker playback' },
   { label: 'Terrain',    value: 'Midpoint Displace',    note: 'Procedural · pixel-level destruction per round' },
   { label: 'Particles',  value: '2,048 pool',           note: 'Additive flash + alpha debris — zero alloc in-game' },
+  { label: 'Weather',    value: '6 sky types',          note: 'Clear · cloudy · rain · sunset · night — biome-driven' },
+  { label: 'Shields',    value: 'Terrain-clipped arc',  note: '72-point circle · cyan→red degradation · absorbs hits' },
   { label: 'Platforms',  value: '5 targets',            note: 'Windows · macOS · Linux · iOS · Android' },
 ];
 

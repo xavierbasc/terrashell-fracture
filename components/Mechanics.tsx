@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Zap, Layers, Music, Wind, ShoppingCart, Smartphone } from 'lucide-react';
+import { Zap, Layers, Music, Wind, ShoppingCart, Shield } from 'lucide-react';
 
 const cards = [
   {
@@ -27,8 +27,8 @@ const cards = [
   },
   {
     icon: Wind,
-    title: 'Wind Physics',
-    desc: 'Randomised wind changes every turn, pushing both projectiles and smoke. Factor it in — or miss and blame the weather.',
+    title: 'Dynamic Weather',
+    desc: '6 sky types — clear day, cloudy, rain, sunset, night clear, night cloudy — each with gradient sky, sun/moon, stars, drifting cloud blobs, and falling particles. Biome-driven selection.',
     accent: '#1a90ff',
     span: 'col-span-1',
   },
@@ -40,9 +40,9 @@ const cards = [
     span: 'col-span-1',
   },
   {
-    icon: Smartphone,
-    title: 'Touch + Keyboard',
-    desc: 'Full multitouch and keyboard support. Pixel-perfect on any screen from 320px mobile to 4K desktop.',
+    icon: Shield,
+    title: 'Energy Shields',
+    desc: 'Each tank starts with a circular energy arc clipped to the terrain surface — invisible underground. Absorbs incoming damage and shifts cyan → orange → red as it degrades.',
     accent: '#00d4aa',
     span: 'col-span-1',
   },
