@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import NavBar    from '@/components/NavBar';
 import Mechanics from '@/components/Mechanics';
@@ -7,10 +6,6 @@ import Controls  from '@/components/Controls';
 import Specs     from '@/components/Specs';
 import Download  from '@/components/Download';
 import Footer    from '@/components/Footer';
-
-// Canvas components — client-only (no SSR)
-const BattlefieldCanvas = dynamic(() => import('@/components/BattlefieldCanvas'), { ssr: false });
-const DemoCanvas        = dynamic(() => import('@/components/DemoCanvas'),        { ssr: false });
 
 export default function Home() {
   return (
@@ -22,7 +17,16 @@ export default function Home() {
         id="top"
         className="relative min-h-screen flex flex-col overflow-hidden bg-[#050508]"
       >
-        <BattlefieldCanvas />
+        {/* Static gradient background */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse at 30% 60%, rgba(255,95,0,0.07) 0%, transparent 55%),' +
+              'radial-gradient(ellipse at 70% 30%, rgba(20,10,60,0.8) 0%, transparent 60%),' +
+              'linear-gradient(to bottom, #050508 0%, #0a0818 100%)',
+          }}
+        />
         <div className="scanlines" />
 
         {/* Vignette */}
@@ -66,7 +70,7 @@ export default function Home() {
             Every shot reshapes the battlefield forever.
           </p>
 
-          {/* CTAs */}
+          {/* CTA */}
           <div className="flex flex-wrap gap-4 justify-center">
             <a
               href="#download"
@@ -75,18 +79,12 @@ export default function Home() {
             >
               ⚡ GET THE GAME
             </a>
-            <a
-              href="#arena"
-              className="font-mono text-sm text-[#c0c0e0] bg-transparent border-2 border-[#2a2a3e] px-8 py-3 clip-angled hover:border-[#ffd040] hover:text-[#ffd040] transition-all duration-200 no-underline"
-            >
-              WATCH DEMO
-            </a>
           </div>
 
           {/* Stats strip */}
           <div className="flex items-center flex-wrap justify-center gap-0">
             {[
-              ['4',     'Weapons'],
+              ['7',     'Weapons'],
               ['2048',  'Particles'],
               ['60Hz',  'Physics'],
               ['5',     'Platforms'],
@@ -105,34 +103,6 @@ export default function Home() {
         {/* Scroll cue */}
         <div className="relative z-10 text-center pb-8">
           <span className="font-mono text-xs text-[#ff5f00] animate-bob inline-block">▼</span>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════ DEMO ═══════════════════════════ */}
-      <section id="arena" className="bg-black border-t border-b border-[#1e1e2e] flex flex-col items-center py-14 px-4">
-        <div className="w-full max-w-4xl">
-          {/* Bar */}
-          <div className="flex items-center gap-4 px-4 py-2.5 bg-[#0d0d18] border border-[#1e1e2e] border-b-0 flex-wrap">
-            <span className="font-mono text-xs text-white bg-[#ff5f00] px-3 py-0.5 tracking-widest animate-pulse-fire">
-              LIVE SIMULATION
-            </span>
-            <span className="font-mono text-xs text-[#404060]">
-              Destructible terrain · Cluster sub-shells · Wind physics · Screen shake
-            </span>
-          </div>
-          {/* Canvas wrapper */}
-          <div
-            className="border border-[#1e1e2e] overflow-hidden"
-            style={{
-              boxShadow: '0 0 60px rgba(255,95,0,0.12), 0 0 120px rgba(255,95,0,0.05), inset 0 0 40px rgba(0,0,0,0.8)',
-            }}
-          >
-            <div className="relative">
-              <DemoCanvas />
-              {/* Scanlines overlay on demo */}
-              <div className="absolute inset-0 pointer-events-none scanlines opacity-40" />
-            </div>
-          </div>
         </div>
       </section>
 
