@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Zap, Layers, Music, Wind, ShoppingCart, Shield } from 'lucide-react';
+import { Zap, Layers, Music, Wind, ShoppingCart, Shield, Mountain } from 'lucide-react';
 
 const cards = [
   {
@@ -10,6 +10,13 @@ const cards = [
     accent: '#ff5f00',
     span: 'col-span-1 md:col-span-2',
     big: true,
+  },
+  {
+    icon: Mountain,
+    title: '8 Terrain Types',
+    desc: 'Sand, Rock, Clay, Snow, Volcanic, Crystal, Jungle, Soil — each with unique blast radius, collapse physics, particle behaviour, and a distinct visual palette. Pseudo-randomly selected each level.',
+    accent: '#40c8a0',
+    span: 'col-span-1 md:col-span-2',
   },
   {
     icon: Layers,

@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 const weapons = [
   {
     id: 'shell',
-    name: 'Shell',
+    name: 'Baby Missile',
     cost: '∞  FREE',
     costColor: '#606080',
-    dmg: 30, rad: 32, spd: 75,
+    dmg: 20, rad: 20, spd: 80,
     barColor: '#ff8c00',
     badge: null,
     desc: 'The backbone of every strategy. Reliable, fast, unlimited. Master the arc before spending credits.',
@@ -24,9 +24,9 @@ const weapons = [
   {
     id: 'nuke',
     name: 'Nuke',
-    cost: '5,000 CR',
+    cost: '12,000 CR',
     costColor: '#ff2a20',
-    dmg: 85, rad: 100, spd: 60,
+    dmg: 90, rad: 100, spd: 55,
     barColor: '#ff2a20',
     badge: 'DEVASTATOR',
     desc: 'Screen-filling white flash. Obliterates a third of the map. Win the war — lose the landscape.',
@@ -54,7 +54,7 @@ const weapons = [
   {
     id: 'cluster',
     name: 'Cluster',
-    cost: '3,000 CR',
+    cost: '7,000 CR',
     costColor: '#ffd040',
     dmg: 20, rad: 15, spd: 80,
     barColor: '#ffd040',

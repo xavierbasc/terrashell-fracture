@@ -8,9 +8,9 @@ const specs = [
   { label: 'Resolution', value: '640 × 360',            note: 'Integer scale — pixel-perfect on any display' },
   { label: 'Timestep',   value: '60 Hz fixed',          note: 'Deterministic physics across all platforms' },
   { label: 'Audio',      value: 'PCM + MOD',            note: 'Real-time synthesis + libxmp tracker playback' },
-  { label: 'Terrain',    value: 'Midpoint Displace',    note: 'Procedural · pixel-level destruction per round' },
+  { label: 'Terrain',    value: 'Midpoint Displace',    note: '8 types · procedural · pixel-level destruction per round' },
   { label: 'Particles',  value: '2,048 pool',           note: 'Additive flash + alpha debris — zero alloc in-game' },
-  { label: 'Weather',    value: '6 sky types',          note: 'Clear · cloudy · rain · sunset · night — biome-driven' },
+  { label: 'Weather',    value: '6 sky types',          note: 'Wind-driven clouds + rain · lightning · biome-driven selection' },
   { label: 'Shields',    value: 'Terrain-clipped arc',  note: '72-point circle · cyan→red degradation · absorbs hits' },
   { label: 'Platforms',  value: '5 targets',            note: 'Windows · macOS · Linux · iOS · Android' },
 ];

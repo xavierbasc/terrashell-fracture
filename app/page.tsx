@@ -86,8 +86,8 @@ export default function Home() {
             {[
               ['7',     'Weapons'],
               ['2048',  'Particles'],
+              ['8',     'Terrains'],
               ['60Hz',  'Physics'],
-              ['5',     'Platforms'],
             ].map(([n, l], i, arr) => (
               <div key={l} className="flex items-center">
                 <div className="flex flex-col items-center px-6 py-3 bg-[#0a0a12]/80 border border-[#1e1e2e]">
