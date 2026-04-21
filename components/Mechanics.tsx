@@ -28,7 +28,7 @@ const cards = [
   {
     icon: Wind,
     title: 'Dynamic Weather',
-    desc: '6 sky types — clear day, cloudy, rain, sunset, night clear, night cloudy — each with gradient sky, sun/moon, stars, drifting cloud blobs, and falling particles. Biome-driven selection.',
+    desc: '6 dark sky types — overcast, fog, rain, red-sky, thunderstorm, moonless night — with lightning that strikes tanks, drifting clouds, falling particles, and biome-driven selection.',
     accent: '#1a90ff',
     span: 'col-span-1',
   },
