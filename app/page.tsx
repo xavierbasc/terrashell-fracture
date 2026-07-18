@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import NavBar    from '@/components/NavBar';
-import Mechanics from '@/components/Mechanics';
+import NavBar      from '@/components/NavBar';
+import Screenshots from '@/components/Screenshots';
+import Mechanics   from '@/components/Mechanics';
 import Arsenal   from '@/components/Arsenal';
 import Controls  from '@/components/Controls';
 import Specs     from '@/components/Specs';
@@ -106,6 +107,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Screenshots />
       <Mechanics />
       <Arsenal />
       <Controls />
