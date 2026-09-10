@@ -32,14 +32,24 @@ export const APPLE_APP_ID = '6802318009';
 // localizada (/es/) manda a todo el mundo a la ficha española.
 export const APPLE_STORE_URL = `https://apps.apple.com/app/terrashell-fracture/id${APPLE_APP_ID}`;
 
-// macOS, Windows, Android and iOS are all headed for their platform's store.
-// Windows is the one that *also* ships straight from this page today; Linux has
-// no store to wait for, so it is served here and nowhere else.
+// Microsoft Store. La ficha es la misma que empaqueta `tools/make_msix.sh`
+// (identidad JavierBsconesVelzquez.TerraShellFracture); el MSIX de esta web va
+// sin firmar y el de la tienda lo firma Microsoft, que es lo que lo hace
+// instalable de un clic.
+export const MS_STORE_URL =
+  'https://apps.microsoft.com/store/detail/9N34XF2MBDLM?cid=DevShareMCLPCS';
+
+// macOS, Windows, Android and iOS all have a storefront. Windows and Android
+// *also* ship straight from this page — el resto de plataformas no pueden—, y
+// Linux no tiene tienda que esperar, así que se sirve aquí y en ningún otro
+// sitio. `storeUrl` sólo se rellena cuando la ficha está publicada de verdad:
+// prometer "próximamente" sobre algo que ya está a la venta manda a la gente a
+// buscarlo a mano.
 type CatalogEntry = Pick<DownloadEntry, 'id' | 'platform' | 'filename' | 'requirement' | 'store' | 'storeUrl' | 'webDownload'>;
 
 const CATALOG: CatalogEntry[] = [
   { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · installer',
-    store: 'Microsoft Store', storeUrl: null, webDownload: true },
+    store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: true },
   // Mismo build que el instalador, empaquetado en MSIX — el formato que pide
   // la Microsoft Store. Va sin firmar, y eso NO es un descuido: makemsix (la
   // versión multiplataforma) sólo empaqueta, y firmar necesita signtool y un
@@ -47,7 +57,7 @@ const CATALOG: CatalogEntry[] = [
   // MSIX, así que este fichero es para quien lo firme él; la descarga que
   // funciona sin más sigue siendo el instalador de arriba.
   { id: 'windowsmsix', platform: 'Windows (MSIX)', filename: 'TerraShellFracture-Windows.msix', requirement: 'Windows 10 1809+ · 64-bit · unsigned package',
-    store: null, storeUrl: null, webDownload: true },
+    store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: true },
   { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package',
     store: null, storeUrl: null, webDownload: true },
   { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run',

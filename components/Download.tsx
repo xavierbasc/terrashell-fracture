@@ -17,7 +17,7 @@ const ICONS: Record<string, typeof Apple> = {
 };
 
 const SMARTSCREEN_NOTE =
-  'The installer isn’t signed with a code-signing certificate, so Windows SmartScreen will flag it as unrecognised. Click "More info", then "Run anyway". It installs to Program Files with Start-menu and desktop shortcuts, and uninstalls from Settings › Apps.';
+  'Also on the Microsoft Store, which is the install-and-forget route: Microsoft signs it and keeps it updated. This installer is the same build for anyone who would rather not use the Store — it isn’t signed with a code-signing certificate, so SmartScreen flags it as unrecognised: click "More info", then "Run anyway". It installs to Program Files with Start-menu and desktop shortcuts, and uninstalls from Settings › Apps.';
 
 const DEB_NOTE =
   'Install with "sudo apt install ./TerraShellFracture-Linux-amd64.deb". It drops the game in /opt, puts a terrashell-fracture launcher on PATH and adds a desktop entry. Built against Debian 12, so it also runs on newer Ubuntu and derivatives.';
@@ -29,7 +29,7 @@ const MACOS_NOTE =
   'Out now on the Mac App Store, universal for Apple Silicon and Intel. It shares a listing with the iPhone build, so a single purchase covers both.';
 
 const MSIX_NOTE =
-  'The same build in MSIX, the format the Microsoft Store uses. It ships unsigned, and Windows will not install an unsigned MSIX — you would have to sign it yourself with your own certificate. For a normal install use the installer above, or wait for the Microsoft Store listing, which Microsoft signs for you.';
+  'The same build in MSIX, the format the Microsoft Store uses. It ships unsigned, and Windows will not install an unsigned MSIX — you would have to sign it yourself with your own certificate. For a normal install, get it from the Microsoft Store, where Microsoft signs it for you, or use the installer above.';
 
 const ANDROID_NOTE =
   'Signed APK, straight from this page — Android allows it where iOS does not. You will need to let your browser or file manager install from an unknown source the first time. The Google Play listing is on its way.';
@@ -71,8 +71,21 @@ function Card({ entry }: { entry: DownloadEntry }) {
             <Store size={13} className="flex-shrink-0" />
             {/* Una ficha publicada se enlaza; una que aún no existe se anuncia.
                 Prometer "próximamente" sobre algo que ya está a la venta manda
-                a la gente a buscarlo a mano. */}
-            <span>{entry.storeUrl ? `On the ${entry.store}` : `Coming soon · ${entry.store}`}</span>
+                a la gente a buscarlo a mano. Y cuando la plataforma además se
+                descarga desde aquí, el botón lo gasta la descarga: la tienda
+                tiene que ser este renglón o no está en ningún sitio. */}
+            {entry.storeUrl ? (
+              <a
+                href={entry.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-2 hover:text-cream transition-colors duration-200 no-underline"
+              >
+                On the {entry.store} ↗
+              </a>
+            ) : (
+              <span>Coming soon · {entry.store}</span>
+            )}
           </div>
         )}
 
