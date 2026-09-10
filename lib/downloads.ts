@@ -24,20 +24,11 @@ export interface DownloadEntry {
   available: boolean;
 }
 
-// Ficha única en App Store: el mismo identificador numérico sirve para iPhone,
-// iPad y Mac porque la app es Universal Purchase (mismo bundle id en las dos
-// plataformas), así que una compra cubre las tres.
-export const APPLE_APP_ID = '6802318009';
-// Sin segmento de país: Apple redirige a la tienda del visitante. La forma
-// localizada (/es/) manda a todo el mundo a la ficha española.
-export const APPLE_STORE_URL = `https://apps.apple.com/app/terrashell-fracture/id${APPLE_APP_ID}`;
-
-// Microsoft Store. La ficha la alimenta el MSIX de `tools/make_msix.sh`
-// (identidad JavierBsconesVelzquez.TerraShellFracture), que sube sin firmar
-// porque lo firma Microsoft — y esa firma es lo que lo hace instalable de un
-// clic, sin el aviso de SmartScreen que sí tiene el instalador suelto.
-export const MS_STORE_URL =
-  'https://apps.microsoft.com/store/detail/9N34XF2MBDLM?cid=DevShareMCLPCS';
+// Las URLs de las fichas viven en `stores.ts`: este módulo toca `fs` y sólo
+// corre en el servidor, y la cabecera —que es cliente— necesita las mismas
+// direcciones. Se reexportan para no romper a quien ya las importaba de aquí.
+export { APPLE_APP_ID, APPLE_STORE_URL, MS_STORE_URL, PLAY_STORE_URL } from './stores';
+import { APPLE_STORE_URL, MS_STORE_URL } from './stores';
 
 // macOS, Windows, Android and iOS all have a storefront. Android es la única
 // que *además* se descarga desde aquí —en Android sí se puede instalar un

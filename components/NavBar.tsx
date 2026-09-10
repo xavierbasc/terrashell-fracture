@@ -1,7 +1,54 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Apple, AppWindow, Smartphone } from 'lucide-react';
+import { APPLE_STORE_URL, MS_STORE_URL, PLAY_STORE_URL } from '@/lib/stores';
+
+// Atajos a las fichas, en la cabecera. Apple lleva **un** icono y no dos: iOS y
+// macOS comparten ficha (Universal Purchase, mismo bundle id), así que dos
+// enlaces al mismo sitio sólo harían dudar de si son distintos.
+//
+// Una tienda sin ficha publicada no se enlaza: se dibuja apagada y lo dice al
+// pasar por encima. Enlazar a una búsqueda o a un "próximamente" manda a la
+// gente a un sitio donde no está el juego. Cuando Play exista, basta con
+// rellenar `PLAY_STORE_URL` en `lib/stores.ts` y este icono se enciende solo.
+const stores = [
+  { id: 'ms',    label: 'Microsoft Store', icon: AppWindow,  url: MS_STORE_URL },
+  { id: 'apple', label: 'App Store · iPhone, iPad and Mac', icon: Apple, url: APPLE_STORE_URL },
+  { id: 'play',  label: 'Google Play',     icon: Smartphone, url: PLAY_STORE_URL },
+];
+
+function StoreLinks({ onNavigate }: { onNavigate?: () => void }) {
+  return (
+    <div className="flex items-center gap-1">
+      {stores.map(({ id, label, icon: Icon, url }) =>
+        url ? (
+          <a
+            key={id}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onNavigate}
+            title={label}
+            aria-label={`TerraShell Fracture on the ${label}`}
+            className="text-muted hover:text-amber-2 transition-colors duration-200 p-2 no-underline"
+          >
+            <Icon size={17} />
+          </a>
+        ) : (
+          <span
+            key={id}
+            aria-disabled="true"
+            title={`${label} — coming soon`}
+            className="text-muted-2/50 p-2 cursor-not-allowed select-none"
+          >
+            <Icon size={17} />
+          </span>
+        )
+      )}
+    </div>
+  );
+}
 
 const links = [
   { label: 'Gallery',   href: '#arena' },
@@ -55,7 +102,11 @@ export default function NavBar() {
           ))}
         </ul>
 
-        {/* CTA */}
+        {/* Fichas de tienda + CTA */}
+        <div className="hidden lg:flex items-center gap-2">
+          <StoreLinks />
+          <span className="w-px h-5 bg-line" aria-hidden="true" />
+        </div>
         <a
           href="#download"
           className="hidden lg:flex items-center gap-2 cut-sm [--cut-w:1px] [--cut-edge:var(--amber-dim)] [--cut-fill:var(--bg)] hover:[--cut-edge:var(--amber)] font-mono text-xs text-amber-2 px-4 py-2 transition-all duration-200"
@@ -63,15 +114,20 @@ export default function NavBar() {
           DOWNLOAD
         </a>
 
-        {/* Mobile burger */}
-        <button
-          onClick={() => setOpen(o => !o)}
-          className="lg:hidden text-amber-2 p-1"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {/* Móvil: los iconos también, delante de la hamburguesa. Es la única
+            forma de llegar a una tienda sin abrir el menú, y en un teléfono es
+            justo donde más sentido tiene. */}
+        <div className="lg:hidden flex items-center gap-1">
+          <StoreLinks />
+          <button
+            onClick={() => setOpen(o => !o)}
+            className="text-amber-2 p-1"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile drawer */}
