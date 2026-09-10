@@ -53,8 +53,10 @@ const CATALOG: CatalogEntry[] = [
   // instalador va sin firmar y SmartScreen lo marca como desconocido, y un
   // MSIX sin firmar Windows directamente no lo instala. Con la ficha
   // publicada, ofrecer al lado dos rutas con advertencias sólo servía para que
-  // alguien eligiera la mala. Los ficheros siguen en `public/downloads/` para
-  // quien tenga el enlace, pero la página ya no los anuncia.
+  // alguien eligiera la mala. Los dos ficheros salieron también de
+  // `public/downloads/`: `filename` se conserva porque describe el
+  // entregable, pero con `webDownload: false` no se sirve ni se enlaza —
+  // viven en `dist/windows/` y `dist/store/`.
   { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · signed by Microsoft',
     store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: false },
   { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package',
