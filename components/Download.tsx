@@ -1,4 +1,4 @@
-import { Apple, AppWindow, Terminal, Smartphone, Store, Package, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
+import { Apple, AppWindow, Terminal, Smartphone, Store, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
 import { asset } from '@/lib/asset';
 import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 
@@ -10,14 +10,13 @@ const ICONS: Record<string, typeof Apple> = {
   macos: Apple,
   ios: Smartphone,
   windows: AppWindow,
-  windowsmsix: Package,
   linux: Terminal,
   linuxtar: Terminal,
   android: Smartphone,
 };
 
-const SMARTSCREEN_NOTE =
-  'Also on the Microsoft Store, which is the install-and-forget route: Microsoft signs it and keeps it updated. This installer is the same build for anyone who would rather not use the Store — it isn’t signed with a code-signing certificate, so SmartScreen flags it as unrecognised: click "More info", then "Run anyway". It installs to Program Files with Start-menu and desktop shortcuts, and uninstalls from Settings › Apps.';
+const WINDOWS_NOTE =
+  'Out now on the Microsoft Store. Microsoft signs the package and keeps it updated, so it installs in one click with no SmartScreen warning to click past — which is exactly why this is the only Windows route the page offers.';
 
 const DEB_NOTE =
   'Install with "sudo apt install ./TerraShellFracture-Linux-amd64.deb". It drops the game in /opt, puts a terrashell-fracture launcher on PATH and adds a desktop entry. Built against Debian 12, so it also runs on newer Ubuntu and derivatives.';
@@ -27,9 +26,6 @@ const IOS_NOTE =
 
 const MACOS_NOTE =
   'Out now on the Mac App Store, universal for Apple Silicon and Intel. It shares a listing with the iPhone build, so a single purchase covers both.';
-
-const MSIX_NOTE =
-  'The same build in MSIX, the format the Microsoft Store uses. It ships unsigned, and Windows will not install an unsigned MSIX — you would have to sign it yourself with your own certificate. For a normal install, get it from the Microsoft Store, where Microsoft signs it for you, or use the installer above.';
 
 const ANDROID_NOTE =
   'Signed APK, straight from this page — Android allows it where iOS does not. You will need to let your browser or file manager install from an unknown source the first time. The Google Play listing is on its way.';
@@ -41,8 +37,7 @@ function Card({ entry }: { entry: DownloadEntry }) {
   const Icon = ICONS[entry.id] ?? DownloadIcon;
   const warning =
     entry.id === 'macos'    ? MACOS_NOTE       :
-    entry.id === 'windows'  ? SMARTSCREEN_NOTE :
-    entry.id === 'windowsmsix' ? MSIX_NOTE      :
+    entry.id === 'windows'  ? WINDOWS_NOTE     :
     entry.id === 'linux'    ? DEB_NOTE         :
     entry.id === 'linuxtar' ? TARBALL_NOTE     :
     entry.id === 'android'  ? ANDROID_NOTE     :
@@ -158,12 +153,11 @@ export default function Download() {
             Download TerraShell Fracture
           </h2>
           <p className="font-mono text-sm text-muted max-w-xl mx-auto leading-relaxed">
-            Windows, Linux and Android install straight from here, with the
-            Windows build also packaged as MSIX. iPhone, iPad and Mac come from
-            the App Store, on one listing — a single purchase covers all three.
-            Windows is headed for the Microsoft Store too. Everything runs
-            fully offline once it&apos;s on your machine, exactly like the rest
-            of the game.
+            Windows comes from the Microsoft Store and iPhone, iPad and Mac
+            from the App Store, on one listing — a single purchase covers all
+            three. Linux and Android install straight from here. Everything
+            runs fully offline once it&apos;s on your machine, exactly like the
+            rest of the game.
           </p>
         </div>
 

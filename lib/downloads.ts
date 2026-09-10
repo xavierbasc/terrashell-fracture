@@ -32,32 +32,31 @@ export const APPLE_APP_ID = '6802318009';
 // localizada (/es/) manda a todo el mundo a la ficha española.
 export const APPLE_STORE_URL = `https://apps.apple.com/app/terrashell-fracture/id${APPLE_APP_ID}`;
 
-// Microsoft Store. La ficha es la misma que empaqueta `tools/make_msix.sh`
-// (identidad JavierBsconesVelzquez.TerraShellFracture); el MSIX de esta web va
-// sin firmar y el de la tienda lo firma Microsoft, que es lo que lo hace
-// instalable de un clic.
+// Microsoft Store. La ficha la alimenta el MSIX de `tools/make_msix.sh`
+// (identidad JavierBsconesVelzquez.TerraShellFracture), que sube sin firmar
+// porque lo firma Microsoft — y esa firma es lo que lo hace instalable de un
+// clic, sin el aviso de SmartScreen que sí tiene el instalador suelto.
 export const MS_STORE_URL =
   'https://apps.microsoft.com/store/detail/9N34XF2MBDLM?cid=DevShareMCLPCS';
 
-// macOS, Windows, Android and iOS all have a storefront. Windows and Android
-// *also* ship straight from this page — el resto de plataformas no pueden—, y
-// Linux no tiene tienda que esperar, así que se sirve aquí y en ningún otro
-// sitio. `storeUrl` sólo se rellena cuando la ficha está publicada de verdad:
-// prometer "próximamente" sobre algo que ya está a la venta manda a la gente a
-// buscarlo a mano.
+// macOS, Windows, Android and iOS all have a storefront. Android es la única
+// que *además* se descarga desde aquí —en Android sí se puede instalar un
+// binario bajado, a diferencia de iOS—, y Linux no tiene tienda que esperar,
+// así que se sirve aquí y en ningún otro sitio. `storeUrl` sólo se rellena
+// cuando la ficha está publicada de verdad: prometer "próximamente" sobre algo
+// que ya está a la venta manda a la gente a buscarlo a mano.
 type CatalogEntry = Pick<DownloadEntry, 'id' | 'platform' | 'filename' | 'requirement' | 'store' | 'storeUrl' | 'webDownload'>;
 
 const CATALOG: CatalogEntry[] = [
-  { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · installer',
-    store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: true },
-  // Mismo build que el instalador, empaquetado en MSIX — el formato que pide
-  // la Microsoft Store. Va sin firmar, y eso NO es un descuido: makemsix (la
-  // versión multiplataforma) sólo empaqueta, y firmar necesita signtool y un
-  // certificado, los dos en Windows. Windows exige firma para instalar un
-  // MSIX, así que este fichero es para quien lo firme él; la descarga que
-  // funciona sin más sigue siendo el instalador de arriba.
-  { id: 'windowsmsix', platform: 'Windows (MSIX)', filename: 'TerraShellFracture-Windows.msix', requirement: 'Windows 10 1809+ · 64-bit · unsigned package',
-    store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: true },
+  // Windows va por la tienda y sólo por la tienda. Había dos tarjetas más —el
+  // instalador NSIS y el MSIX suelto—, y las dos eran peores que ésta: el
+  // instalador va sin firmar y SmartScreen lo marca como desconocido, y un
+  // MSIX sin firmar Windows directamente no lo instala. Con la ficha
+  // publicada, ofrecer al lado dos rutas con advertencias sólo servía para que
+  // alguien eligiera la mala. Los ficheros siguen en `public/downloads/` para
+  // quien tenga el enlace, pero la página ya no los anuncia.
+  { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · signed by Microsoft',
+    store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: false },
   { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package',
     store: null, storeUrl: null, webDownload: true },
   { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run',
