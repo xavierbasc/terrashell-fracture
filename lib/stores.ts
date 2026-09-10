@@ -15,8 +15,10 @@ export const APPLE_STORE_URL = `https://apps.apple.com/app/terrashell-fracture/i
 // (identidad JavierBsconesVelzquez.TerraShellFracture), que sube sin firmar
 // porque lo firma Microsoft — y esa firma es lo que lo hace instalable de un
 // clic, sin el aviso de SmartScreen que sí tiene el instalador suelto.
-export const MS_STORE_URL =
-  'https://apps.microsoft.com/store/detail/9N34XF2MBDLM?cid=DevShareMCLPCS';
+// Forma corta y sin parámetros: el enlace que ofrece Partner Center para
+// compartir lleva un `?cid=DevShareMCLPCS` que sólo sirve para atribuirle la
+// visita a ese botón. En la web propia no atribuye nada y ensucia la URL.
+export const MS_STORE_URL = 'https://apps.microsoft.com/detail/9N34XF2MBDLM';
 
 // Google Play: la ficha todavía no existe. Se declara aquí en null a
 // propósito, para que quien la publique tenga un solo sitio que tocar y la
