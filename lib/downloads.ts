@@ -48,6 +48,10 @@ export const MS_STORE_URL =
 type CatalogEntry = Pick<DownloadEntry, 'id' | 'platform' | 'filename' | 'requirement' | 'store' | 'storeUrl' | 'webDownload'>;
 
 const CATALOG: CatalogEntry[] = [
+  // El orden es el de la rejilla, que tiene dos columnas: escritorio arriba
+  // (Windows y macOS), móvil en la fila siguiente (iOS y Android) y Linux al
+  // final, con el .deb antes que el tarball porque cubre a la mayoría.
+  //
   // Windows va por la tienda y sólo por la tienda. Había dos tarjetas más —el
   // instalador NSIS y el MSIX suelto—, y las dos eran peores que ésta: el
   // instalador va sin firmar y SmartScreen lo marca como desconocido, y un
@@ -59,18 +63,18 @@ const CATALOG: CatalogEntry[] = [
   // viven en `dist/windows/` y `dist/store/`.
   { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · signed by Microsoft',
     store: 'Microsoft Store', storeUrl: MS_STORE_URL, webDownload: false },
-  { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package',
-    store: null, storeUrl: null, webDownload: true },
-  { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run',
-    store: null, storeUrl: null, webDownload: true },
   { id: 'macos',   platform: 'macOS',   filename: 'TerraShellFracture-macOS.dmg',          requirement: 'macOS 11+ · Apple Silicon & Intel',
     store: 'Mac App Store', storeUrl: APPLE_STORE_URL, webDownload: false },
+  { id: 'ios',     platform: 'iOS',     filename: 'TerraShellFracture-iOS.ipa',            requirement: 'iPhone & iPad · iOS 15+',
+    store: 'App Store', storeUrl: APPLE_STORE_URL, webDownload: false },
   // El APK se sirve desde aquí además de anunciar Play: en Android sí se puede
   // instalar un binario descargado, a diferencia de iOS.
   { id: 'android', platform: 'Android', filename: 'TerraShellFracture-Android.apk',        requirement: 'Android 7.0+ · arm64 & armv7',
     store: 'Google Play', storeUrl: null, webDownload: true },
-  { id: 'ios',     platform: 'iOS',     filename: 'TerraShellFracture-iOS.ipa',            requirement: 'iPhone & iPad · iOS 15+',
-    store: 'App Store', storeUrl: APPLE_STORE_URL, webDownload: false },
+  { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package',
+    store: null, storeUrl: null, webDownload: true },
+  { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run',
+    store: null, storeUrl: null, webDownload: true },
 ];
 
 function formatSize(bytes: number): string {
