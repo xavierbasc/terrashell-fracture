@@ -1,7 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Apple, AppWindow, Smartphone } from 'lucide-react';
+import { Menu, X, Apple, AppWindow } from 'lucide-react';
+import { AndroidIcon } from './PlatformIcons';
 import { APPLE_STORE_URL, MS_STORE_URL, PLAY_STORE_URL } from '@/lib/stores';
 
 // Atajos a las fichas, en la cabecera. Apple lleva **un** icono y no dos: iOS y
@@ -15,7 +16,7 @@ import { APPLE_STORE_URL, MS_STORE_URL, PLAY_STORE_URL } from '@/lib/stores';
 const stores = [
   { id: 'ms',    label: 'Microsoft Store', icon: AppWindow,  url: MS_STORE_URL },
   { id: 'apple', label: 'App Store · iPhone, iPad and Mac', icon: Apple, url: APPLE_STORE_URL },
-  { id: 'play',  label: 'Google Play',     icon: Smartphone, url: PLAY_STORE_URL },
+  { id: 'play',  label: 'Google Play',     icon: AndroidIcon, url: PLAY_STORE_URL },
 ];
 
 function StoreLinks({ onNavigate }: { onNavigate?: () => void }) {

@@ -1,4 +1,5 @@
-import { Apple, AppWindow, Terminal, Smartphone, Store, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
+import { Apple, AppWindow, Store, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
+import { AndroidIcon, TuxIcon } from './PlatformIcons';
 import { asset } from '@/lib/asset';
 import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 
@@ -6,13 +7,21 @@ import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 // at build time (see lib/downloads.ts). No invented numbers: a platform with
 // no binary in that folder yet just shows no size, not a guess.
 
-const ICONS: Record<string, typeof Apple> = {
+// Cada plataforma con su marca. iOS lleva manzana igual que macOS —es la misma
+// casa y la misma ficha—, y Android y Linux dejan el teléfono y el terminal
+// genéricos por el robot y el pingüino: con los genéricos había que leer el
+// rótulo para saber de qué tarjeta se trataba.
+// `React.ElementType` y no `typeof Apple`: lucide exporta sus iconos con
+// forwardRef y los de `PlatformIcons` son funciones simples, y los dos tienen
+// que caber en el mismo mapa. Lo que importa aquí es que se puedan renderizar
+// con `size` y `className`, que es lo que hacen ambos.
+const ICONS: Record<string, React.ElementType> = {
   macos: Apple,
-  ios: Smartphone,
+  ios: Apple,
   windows: AppWindow,
-  linux: Terminal,
-  linuxtar: Terminal,
-  android: Smartphone,
+  linux: TuxIcon,
+  linuxtar: TuxIcon,
+  android: AndroidIcon,
 };
 
 const WINDOWS_NOTE =
